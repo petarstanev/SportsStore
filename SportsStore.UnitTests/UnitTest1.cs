@@ -27,9 +27,8 @@ namespace SportsStore.UnitTests
             //new Product[] {new Product {ProductID = 1, Name = "1"}}
 
             ProductController controller = new ProductController(mock.Object);
-            controller.PageSize = 2;
-
-
+            controller.PageSize = 3;
+            
             IEnumerable<Product> result = (IEnumerable<Product>)controller.List(2).Model;
 
             //Assert
@@ -37,8 +36,6 @@ namespace SportsStore.UnitTests
             Assert.IsTrue(prodArray.Length == 2);
             Assert.AreEqual(prodArray[0].Name,"P4");
             Assert.AreEqual(prodArray[1].Name, "P5");
-
-
         }
     }
 }
