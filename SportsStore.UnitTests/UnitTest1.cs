@@ -16,8 +16,15 @@ namespace SportsStore.UnitTests
         public void Can_Paginate()
         {
             Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.SetupGet(p => p.Products).Returns(new Product[] {new Product {ProductID = 1, Name = "1"}});
-
+            mock.Setup(p => p.Products).Returns(new Product[]
+            {
+                new Product {ProductID = 1, Name="P1"},
+                new Product {ProductID = 2, Name="P2"},
+                new Product {ProductID = 3, Name="P3"},
+                new Product {ProductID = 4, Name="P4"},
+                new Product {ProductID = 5, Name="P5"},
+            });
+            //new Product[] {new Product {ProductID = 1, Name = "1"}}
 
             ProductController controller = new ProductController(mock.Object);
             controller.PageSize = 2;
