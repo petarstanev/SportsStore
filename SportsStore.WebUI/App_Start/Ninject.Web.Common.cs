@@ -11,6 +11,8 @@ namespace SportsStore.WebUI.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    using SportsStore.Domain.Abstract;
+    using SportsStore.Domain.Concrete;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +63,8 @@ namespace SportsStore.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
         }        
     }
 }

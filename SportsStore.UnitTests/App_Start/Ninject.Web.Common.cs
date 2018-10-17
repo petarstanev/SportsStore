@@ -1,3 +1,6 @@
+using Ninject.Web.Common;
+using Ninject.Web.Common.WebHost;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SportsStore.UnitTests.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(SportsStore.UnitTests.App_Start.NinjectWebCommon), "Stop")]
 
@@ -9,8 +12,7 @@ namespace SportsStore.UnitTests.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Web.Common.WebHost;
+
 
     public static class NinjectWebCommon 
     {

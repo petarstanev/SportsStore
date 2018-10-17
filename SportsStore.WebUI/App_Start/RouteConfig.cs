@@ -18,6 +18,7 @@ namespace SportsStore.WebUI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
             );
+
         }
     }
 }
