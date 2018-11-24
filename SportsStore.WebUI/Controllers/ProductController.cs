@@ -33,7 +33,7 @@ namespace SportsStore.WebUI.Controllers
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
                 TotalItems =
-                    category == ""
+                    String.IsNullOrEmpty(category)
                         ? repository.Products.Count()
                         : repository.Products.Count(e => e.Category == category)
             };
@@ -44,7 +44,6 @@ namespace SportsStore.WebUI.Controllers
                 PagingInfo = pageInfo,
                 CurrentCategory = category
             };
-
 
             return View(model);
 
