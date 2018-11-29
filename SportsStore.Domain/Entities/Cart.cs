@@ -5,40 +5,40 @@ namespace SportsStore.Domain.Entities
 {
     public class Cart
     {
-        private List<CartLine> lineCollection = new List<CartLine>();
-
+        public List<CartLine> Lines { get; set; }
+        public Cart()
+        {
+            Lines = new List<CartLine>();
+        }
+        
         public void AddItem(Product product, int quantity)
         {
-            CartLine line = lineCollection.FirstOrDefault(p => p.Product.ProductID == product.ProductID);
+            CartLine line = Lines.Where(p => p.Product.ProductID == product.ProductID).FirstOrDefault();
 
             if (line == null)
             {
-                lineCollection.Add(line);
+                CartLine item = new CartLine {Product = product, Quantity = 1};
+                Lines.Add(item);
             }
             else
             {
-                line.Quantity++;
+                line.Quantity += quantity;
             }
         }
 
         public void RemoveLine(Product product)
         {
-            lineCollection.RemoveAll(p => p.Product == product);
+            Lines.RemoveAll(p => p.Product == product);
         }
 
         public decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(p => p.Product.Price * p.Quantity);
+            return Lines.Sum(p => p.Product.Price * p.Quantity);
         }
 
         public void Clear()
         {
-            lineCollection.Clear();
-        }
-
-        public IEnumerable<CartLine> Lines
-        {
-            get { return lineCollection; }
+            Lines.Clear();
         }
     }
 
