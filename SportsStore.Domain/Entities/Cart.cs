@@ -28,7 +28,7 @@ namespace SportsStore.Domain.Entities
 
         public void RemoveLine(Product product)
         {
-            Lines.RemoveAll(p => p.Product == product);
+            Lines.RemoveAll(p => p.Product.ProductID == product.ProductID);
         }
 
         public decimal ComputeTotalValue()
