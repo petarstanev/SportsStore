@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Concrete;
 using SportsStore.Domain.Entities;
 using SportsStore.WebUI.Models;
 
@@ -9,12 +10,12 @@ namespace SportsStore.WebUI.Controllers
     public class CartController : Controller
     {
         private readonly IProductRepository repository;
-        private IOrderProcessor orderProcessor;
+        private readonly IOrderProcessor _orderProcessor;
 
-        public CartController(IProductRepository repository, IOrderProcessor orderProcessor)
+        public CartController(IProductRepository repository,IOrderProcessor orderProcessor)
         {
             this.repository = repository;
-            this.orderProcessor = orderProcessor;
+            _orderProcessor = orderProcessor;
         }
 
         public RedirectToRouteResult AddToCart(Cart cart, int productId,
@@ -79,7 +80,7 @@ namespace SportsStore.WebUI.Controllers
             }
             if (ModelState.IsValid)
             {
-                orderProcessor.ProcessOrder(cart, shippingDetails);
+                _orderProcessor.ProcessOrder(cart, shippingDetails);
                 cart.Clear();
                 return View("Completed");
             }
